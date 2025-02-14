@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Whiteboard</title>
+    <style>
+        /* CSS Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            background: white;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .dark-mode canvas {
+            background: #333; 
+        }
+        .dark-mode #controls {
+            background: #333; 
+        }
+       
+        #controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.9);
+             z-index: 10;
+        }
+
+        button {
+            background: linear-gradient(135deg, #007BFF, #0056b3);
+            border: none;
+            color: white;
+            font-size: 14px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #clearButton {
+            background: linear-gradient(135deg, #710610, #bd2130) !important;
+        }
+
+        #clearButton:hover,
+        #saveDrawing:hover,
+        #changeBackground:hover {
+            background: linear-gradient(135deg, #0056b3, #007BFF); 
+        }
+
+        button:hover {
+            transform: scale(0.95);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .active {
+            background: linear-gradient(135deg, #28a745, #218838); 
+        }
+
+        input[type="range"] {
+            width: 150px;
+            margin-top: 10px;
+            color: black;
+        }
+
+        label {
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        #status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: black;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #timer {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: black;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #clientListContainer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: white !important;
+            background-color: black;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid black;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #clientListHeading {
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #clientList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #clientList li {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive Design */
+        /* I know standard is 768px but i am using 1000px */
+        @media (max-width: 1000px) {
+            #controls {
+                flex-direction: column;
+                align-items: flex-start;
+                width: auto;
+                gap: 5px;
+            }
+
+            button {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            input[type="range"] {
+                width: 100px;
+            }
+
+            label {
+                font-size: 12px;
+            }
+
+            #status {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+
+            #timer {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+
+            #clientListContainer {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px;
+            }
+
+            #clientListHeading {
+                font-size: 14px;
+            }
+
+            #clientList li {
+                font-size: 12px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+  
+
+    <div id="controls">
+        <button id="clearButton">Clear Canvas</button>
+        <button id="changeBackground">Change Background</button>
+        <button id="textTool">Text </button>
+        <button id="saveDrawing">Save Drawing</button>
+        <button id="lineTool">Line</button> 
+        <div>
+            <input type="range" id="strokeSize" min="1" max="10" value="2">
+            <label for="strokeSize">Brush Size</label>
+        </div>
+    </div>
+
+    <div id="status">Drawing Mode</div>
+    <div id="timer">00:00:00</div>
+    <canvas id="whiteboard"></canvas>
+    <div id="clientListContainer" >
+        <h3 id="clientListHeading">Active Clients</h3>
+        <ul id="clientList"></ul>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
