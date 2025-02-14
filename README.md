@@ -31,7 +31,7 @@ A real-time, multi-user whiteboard application that enables users to draw, add t
 #### 1. Clone the Repository
 
     git clone https://github.com/asharahmedd/collaborative-whiteboard.git
-    cd collaborative-whiteboard
+    cd Collaborative-Whiteboard
 
 #### 2. Install Dependencies
     Ensure you have Node.js installed, then install the required WebSocket package:
