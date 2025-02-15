@@ -30,7 +30,7 @@ A real-time, multi-user whiteboard application that enables users to draw, add t
 
 #### 1. Clone the Repository
 
-    git clone https://github.com/asharahmedd/collaborative-whiteboard.git
+    git clone https://github.com/asharahmedd/Collaborative-Whiteboard.git
     cd Collaborative-Whiteboard
 
 #### 2. Install Dependencies
