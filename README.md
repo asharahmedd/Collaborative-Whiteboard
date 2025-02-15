@@ -23,7 +23,8 @@ A real-time, multi-user whiteboard application that enables users to draw, add t
 │   │── script.js        # Client-side logic (drawing, WebSocket handling)        
 │── /server        
 │   │── server.js        # WebSocket server for real-time communication        
-│── README.md           # Project documentation        
+│── README.md        # Project documentation
+|── package-lock.json       
 ```
 
 ## **Installation & Setup**
