@@ -269,7 +269,7 @@ function getRandomColor() {
 let color = getRandomColor();
 
 ```
-**- Rseizing Canvas:** 
+**- Resizing Canvas:** 
 
 ```javascript
 const resizeCanvas = () => {
