@@ -245,7 +245,7 @@ This system allows multiple users to draw together in real-time with very little
 ## How the Key Parts Work Together
 **1.	WebSocket Server:** The WebSocket server maintains open connections with multiple clients, allowing real-time bidirectional communication. It receives drawing data from one client and distributes it to others, ensuring all users stay in sync. The server can also store drawing data to allow new users to receive the current state of the canvas when they join.  
 
-**2.	Client-Side Canvas Rendering:** Each client has a canvas element displaying the drawing. The client captures user inputs, such as mouse movements and clicks, to determine when and where strokes should be drawn. This datba is sent to the WebSocket server and rendered locally to provide instant feedback.  
+**2.	Client-Side Canvas Rendering:** Each client has a canvas element displaying the drawing. The client captures user inputs, such as mouse movements and clicks, to determine when and where strokes should be drawn. This data is sent to the WebSocket server and rendered locally to provide instant feedback.  
 
 **3.	State Synchronization**: Since multiple users draw simultaneously, keeping the canvas synchronized is essential. Each client listens for WebSocket server updates and renders strokes from other users. This ensures that all clients display the same canvas, even though they are interacting independently.
    
