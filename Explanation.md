@@ -209,7 +209,7 @@ We can have a drawing tool, a line tool, a text tool, and a clear tool.
   ```
 ---
 
-## State Synchronization  
+## 3. State Synchronization  
 
 State Synchronization ensures all connected users see the same drawing, even if they join late. When a new user connects, the server can send a snapshot of the current canvas state to ensure consistency.   
 The canvas state is stored as an array `(let canvasState = [];)` in which all kinds of strokes and data are stored using a normal push:  
@@ -230,7 +230,7 @@ ws.send(JSON.stringify({ type: 'init', canvasState }));
 The client replays all strokes and text to match the latest version. 
 
 
-## What Happens When the Network Connection is Disrupted
+## 4. What Happens When the Network Connection is Disrupted
 
 If a user loses their connection, they will stop receiving drawing updates from others, and their changes won’t be sent to the server, but they can still draw locally on their canvas. However, when they reconnect, the server can resend the latest state of the canvas, ensuring they don’t miss any updates. If the server goes down, all users will be disconnected, and drawing updates will be lost unless a backup or database storage mechanism is implemented.
 This system allows multiple users to draw together in real-time with very little delay. The WebSocket server ensures smooth communication, while the canvas on each user’s screen updates instantly, creating a seamless shared drawing experience.
