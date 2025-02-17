@@ -229,6 +229,13 @@ ws.send(JSON.stringify({ type: 'init', canvasState }));
 ```
 The client replays all strokes and text to match the latest version. 
 
+
+## What Happens When the Network Connection is Disrupted
+
+If a user loses their connection, they will stop receiving drawing updates from others, and their changes won’t be sent to the server, but they can still draw locally on their canvas. However, when they reconnect, the server can resend the latest state of the canvas, ensuring they don’t miss any updates. If the server goes down, all users will be disconnected, and drawing updates will be lost unless a backup or database storage mechanism is implemented.
+This system allows multiple users to draw together in real-time with very little delay. The WebSocket server ensures smooth communication, while the canvas on each user’s screen updates instantly, creating a seamless shared drawing experience.
+
+
 ## What Happens If the Connection is Lost? 
 
 **Temporary disconnection:** If a user loses internet temporarily, their local drawing continues. When the connection is restored, they receive all updates from the server.
@@ -249,10 +256,67 @@ The client replays all strokes and text to match the latest version.
 •	Each client receives the drawing data and updates their canvas accordingly.  
 •	If a new client joins, the server can send previously stored strokes to update them.  
 
-## What Happens When the Network Connection is Disrupted
+---
+## Helper Functions:
 
-If a user loses their connection, they will stop receiving drawing updates from others, and their changes won’t be sent to the server, but they can still draw locally on their canvas. However, when they reconnect, the server can resend the latest state of the canvas, ensuring they don’t miss any updates. If the server goes down, all users will be disconnected, and drawing updates will be lost unless a backup or database storage mechanism is implemented.
-This system allows multiple users to draw together in real-time with very little delay. The WebSocket server ensures smooth communication, while the canvas on each user’s screen updates instantly, creating a seamless shared drawing experience.
+**- Random Color:**  
+
+```javascript
+function getRandomColor() {
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+}
+let color = getRandomColor();
+
+```
+**- Rseizing Canvas:** 
+
+```javascript
+const resizeCanvas = () => {
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    ctx.putImageData(imageData, 0, 0);
+};
+```
+**- Toggling the Background:**(it activates whenever the client cicks on change background)  
+
+```javascript
+const toggleBackground = () => {
+    document.body.classList.toggle('dark-mode');
+};
+```
+**- Saving the drawing:**  
+
+```javascript
+const saveDrawing = () => {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = 'drawing.png';
+    link.click();
+};
+```
+
+**- Timer Start/Update:**
+
+```javascript
+const startTimer = () => {
+    startTime = Date.now();
+    updateTimer();
+};
+
+// Update the timer
+const updateTimer = () => {
+    const elapsedTime = Date.now() - startTime;
+    const hours = Math.floor(elapsedTime / 3600000);
+    const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+    timerElement.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    requestAnimationFrame(updateTimer);
+};
+
+```
+
 
 
 
