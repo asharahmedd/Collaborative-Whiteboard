@@ -238,7 +238,8 @@ This system allows multiple users to draw together in real-time with very little
 
 ## What Happens If the Connection is Lost? 
 
-**Temporary disconnection:** If a user loses internet temporarily, their local drawing continues. When the connection is restored, they receive all updates from the server.
+**Temporary disconnection:** If a user loses internet temporarily, their local drawing continues. When the connection is restored, they receive all updates from the server.  
+
 **Permanent Disconnection:** If the WebSocket connection is closed, the user is removed from the active clients list. They must reconnect to see updates
 
 ## How the Key Parts Work Together
